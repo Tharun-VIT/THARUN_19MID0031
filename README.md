@@ -36,5 +36,9 @@ Below output screenshots shows the output of graphs with changed value of width 
 ![image](https://user-images.githubusercontent.com/89411580/160141838-89b3abf1-7bd7-4ca5-a552-fc6785aed7fe.png)
 ![image](https://user-images.githubusercontent.com/89411580/160141854-22392b20-967a-43e1-89cb-406631871afd.png)
 ![1](https://user-images.githubusercontent.com/89411580/160142815-65977754-67c6-4ad7-989c-eb5d5fb10433.gif)
+![image](https://user-images.githubusercontent.com/89411580/160143033-ce15b153-e390-40fb-a493-e7b42e6f9f20.png)
+![2](https://user-images.githubusercontent.com/89411580/160143057-ed3cf4ec-b18a-4f28-b680-b7ba08edc9b6.gif)
+![image](https://user-images.githubusercontent.com/89411580/160143088-4ea053f6-e57a-43c2-9402-88e020fdcdd4.png)
+![3](https://user-images.githubusercontent.com/89411580/160143246-fe730feb-dab2-47a1-9b8a-4fed1a6dd653.gif)
 
 
