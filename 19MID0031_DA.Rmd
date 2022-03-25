@@ -1,0 +1,107 @@
+# S.THARUN-19MID0031
+
+## DIGITAL ASSIGNMENT 1
+
+### Data set link ==\> [IPL Auction 2022 \| Kaggle](https://www.kaggle.com/datasets/vinitshah0110/ipl-auction-2022)
+
+### Loading Libraries
+
+```{r}
+options(warn=-1)
+library(ggvis)
+library(plotly)
+library(knitr)
+library(dplyr)
+library(gganimate)
+library(gifski)
+library(ggplot2)
+```
+
+### Loading Data
+
+```{r}
+df = read.csv("IPL_Auction_2022_FullList.csv")
+head(df)
+```
+
+### Structure of Data
+
+```{r}
+str(df)
+```
+
+### ggvis Plots
+
+```{r}
+ggvis(df, x = ~IPL, y = ~Age)
+```
+
+```{r}
+ggvis(df, x = ~IPL, y = ~Specialism, stroke = ~Age) %>% layer_points()
+```
+
+```{r}
+df %>% ggvis(~Age, ~Base.Price, shape = ~factor(Bid)) %>% layer_points()
+```
+
+```{r}
+df %>% ggvis(~Age, ~Base.Price) %>%
+  layer_smooths(span = 1) %>%
+  layer_smooths(span = 0.3, stroke := "red") 
+```
+
+```{r}
+df %>% 
+  ggvis(~Age) %>% 
+  layer_histograms(width =  input_slider(0, 2, step = 0.10, label = "width"),
+                   center = input_slider(0, 2, step = 0.05, label = "center"))
+```
+
+### Plotly plots
+
+```{r}
+plot_ly(data=df,x=~Age,y=~IPL,mode="markers",
+        color=~Bowling, colors ='Set1', symbol =~ Bowling,
+        marker=list(size=9))
+```
+
+```{r}
+plot_ly(data=df,x=~C.U.A, y=~Batting)
+```
+
+```{r}
+plot_ly(data=df,x=~C.U.A, y=~Base.Price, type="bar",name="Base Price")%>%
+  add_trace(y=~IPL,name="No of IPL")
+```
+
+```{r}
+df1=data.frame(unique(df$New.Franchise),aggregate(df,by=list(df$New.Franchise),
+                                                  FUN=median)["Age"])
+plot_ly(df1,labels=~unique.df.New.Franchise.,values =~Age,type ="pie")%>%
+  layout(title="Franchise Vs Age")
+```
+
+```{r}
+plot_ly(df,x=~X2021.Team,y=~Base.Price,type="box",color=~X2021.Team)%>%
+  layout(title="X2021 Vs Base price")
+```
+
+### gganimate plots
+
+```{r}
+p<-ggplot(df,aes(x=Age,y=IPL))+geom_point()+
+  transition_states(Bid,transition_length = 2,state_length = 1)
+animate(p,renderer=gifski_renderer())
+```
+
+```{r}
+p<-ggplot(df,aes(x=IPL,y=Base.Price,group=Specialism,color=Specialism))+
+  geom_line()+geom_point()+transition_reveal(Base.Price)
+animate(p,width=300,height=300,renderer=gifski_renderer())
+```
+
+```{r}
+p<-ggplot(df,aes(x=IPL,y=Base.Price,group=Specialism,color=Specialism))+
+  geom_line()+geom_point()+transition_reveal(Base.Price)+ease_aes(y="bounce-out")
+animate(p,width=300,height=300,renderer=gifski_renderer())
+```
